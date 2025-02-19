@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Login - Ice Services</title>
+    <link rel="stylesheet" href="index.css">
+    <script defer src="index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Welcome to <span>Ice Services</span></h1>
+        <div class="login-box">
+            <label for="phone">Enter your phone number to continue:</label>
+            <input type="text" id="phone" placeholder="07XXXXXXXX" maxlength="10">
+            <button onclick="validateLogin()">Submit</button>
+            <p class="error-message" id="error-message"></p>
+        </div>
+        <p class="register-text">
+            If you are a new client, please follow the WhatsApp link below to register.
+        </p>
+        <a href="https://wa.me/254700338057" class="whatsapp-link">
+            <img src="images.png" alt="WhatsApp"> Chat on WhatsApp
+        </a>
+    </div>
+</body>
+</html>
