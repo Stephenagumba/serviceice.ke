@@ -1,0 +1,289 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Page Background */
+body {
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+/* Centering Header */
+.header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Header Title */
+.header h1 {
+    font-size: 28px;
+    color: #ff3b3b;
+}
+
+/* Centering Search Bar */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 60%;
+    max-width: 400px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Section Titles */
+h2 {
+    font-size: 22px;
+    color: #ffcc00;
+    margin: 15px 0;
+}
+
+/* Main Content Centering */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Movie Section */
+.movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Adjusted Movie Cards Size */
+.item {
+    width: 50%;
+    max-width: 280px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 8px;
+    margin: 8px;
+    box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.item:hover {
+    transform: scale(1.05);
+}
+
+/* Movie Images */
+.item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Movie Titles */
+.item p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff3b3b;
+    text-align: center;
+}
+
+/* ============================= */
+/* FOOTBALL NEWS SECTION - CLASSIC LOOK */
+/* ============================= */
+
+#football {
+    width: 90%;
+    max-width: 800px;
+    background: #222; /* Darker background for contrast */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0px 4px 15px rgba(255, 255, 0, 0.3); /* Yellow glow */
+    text-align: left;
+}
+
+/* Football Section Header */
+#football h2 {
+    font-size: 24px;
+    color: #ffcc00; /* Classic yellow title */
+    text-align: center;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* News Items */
+.news-item {
+    padding: 15px;
+    border-bottom: 1px solid #444; /* Subtle separator */
+    transition: background 0.3s ease-in-out;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+/* News Title */
+.news-item h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+/* News Description */
+.news-item p {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.5;
+}
+
+/* Read More Link */
+.news-item a {
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.news-item a:hover {
+    color: #ff3b3b;
+}
+
+/* Hover Effect for News Items */
+.news-item:hover {
+    background: rgba(255, 255, 0, 0.1);
+}
+
+/* ============================= */
+/* MARKET TRENDS SECTION */
+/* ============================= */
+.market-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .item {
+        width: 70%;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    #football {
+        width: 95%;
+    }
+
+    .news-item h3 {
+        font-size: 16px;
+    }
+
+    .news-item p {
+        font-size: 13px;
+    }
+}
+.market-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #000428, #004e92);
+    padding: 15px 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-bar {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-bar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 16px;
+}
+
+.nav-bar a:hover {
+    color: yellow;
+}
+footer {
+    background: linear-gradient(to right, #000428, #004e92);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.social-icons {
+    margin-bottom: 15px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: yellow;
+}
+
+.streaming-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.streaming-links img {
+    width: 50px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.streaming-links img:hover {
+    transform: scale(1.1);
+}
+
+footer p {
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0.8;
+}
