@@ -276,3 +276,55 @@ footer p {
     margin-top: 10px;
     opacity: 0.8;
 }
+#football-news {
+    background-color: white; /* White background */
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    text-align: center; /* Center align the text */
+    margin: 20px auto; /* Add margin for spacing */
+    width: 90%; /* Set a width to make it responsive */
+    max-width: 1200px; /* Prevent it from getting too wide on large screens */
+}
+
+#football-news h2 {
+    color: #ff4500; /* A vibrant color for the heading */
+    font-size: 24px; /* Make the heading stand out */
+    margin-bottom: 10px; /* Space below the heading */
+}
+
+#fixturesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Space between match cards */
+}
+
+.match-card {
+    background-color: #f8f9fa; /* Light gray background */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px;
+    text-align: center;
+    width: 250px; /* Set a fixed width for match cards */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.match-card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.match-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 3px 0;
+}
+
+.match-card .team-logo {
+    width: 40px; /* Adjust logo size */
+    height: 40px;
+    object-fit: cover; /* Ensure logos maintain aspect ratio */
+    margin: 5px;
+}
