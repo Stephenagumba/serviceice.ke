@@ -32,7 +32,7 @@ async function fetchTrendingMovies() {
 }
 
 // Your API key from API-Football
-const apiKey = "3cd701bd0d80235d722ccec15e..."; // Replace with your valid API key
+const apiKey = "3cd701bd0d80235d722ccec15ec15538"; // Replace with your valid API key
 
 // API endpoint for fetching live fixtures
 const apiUrl = "https://v3.football.api-sports.io/fixtures?live=all";
