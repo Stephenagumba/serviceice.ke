@@ -30,40 +30,61 @@ async function fetchTrendingMovies() {
         console.error("Error fetching trending movies:", error);
     }
 }
+// Your API key from API-Football
+const apiKey = "YOUR_API_KEY"; // Replace this with your actual API key
 
-async function fetchFootballNews() {
-    const apiKey = "77ab396bf082405e84043649d6911466";  
-    const url = `https://newsapi.org/v2/top-headlines?category=sports&apiKey=${apiKey}`;
+// API endpoint for fetching live fixtures
+const apiUrl = "https://v3.football.api-sports.io/fixtures?live=all";
 
+// Function to fetch and display football fixtures
+async function fetchFootballFixtures() {
     try {
-        const response = await fetch(url);
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "x-apisports-key": apiKey,
+                "Accept": "application/json"
+            }
+        });
+
         const data = await response.json();
+        console.log("API Response:", data); // Debugging log
 
-        console.log("API Response:", data); // Debugging
-
-        if (data.status !== "ok") {
-            console.error("API Error:", data);
+        // Check if request was successful
+        if (!data.response || data.response.length === 0) {
+            console.error("No live matches found.");
             return;
         }
 
-        const newsContainer = document.getElementById("football");
-        newsContainer.innerHTML = "";
+        // Select the container to display fixtures
+        const fixturesContainer = document.getElementById("fixturesContainer");
+        fixturesContainer.innerHTML = ""; // Clear previous results
 
-        data.articles.slice(0, 5).forEach(news => {
-            const div = document.createElement("div");
-            div.classList.add("news-item");
-            div.innerHTML = `
-                <h3>${news.title}</h3>
-                <p>${news.description || "No description available."}</p>
-                <a href="${news.url}" target="_blank">Read more</a>
+        // Loop through fixtures and display them
+        data.response.forEach(match => {
+            const fixture = match.fixture;
+            const teams = match.teams;
+            const goals = match.goals;
+
+            // Create a div for each match
+            const matchDiv = document.createElement("div");
+            matchDiv.classList.add("match-item");
+            matchDiv.innerHTML = `
+                <h3>${teams.home.name} vs ${teams.away.name}</h3>
+                <p>${fixture.status.long} - ${fixture.date}</p>
+                <p>Score: ${goals.home !== null ? goals.home : "N/A"} - ${goals.away !== null ? goals.away : "N/A"}</p>
             `;
-            newsContainer.appendChild(div);
-        });
 
+            fixturesContainer.appendChild(matchDiv);
+        });
     } catch (error) {
-        console.error("Error fetching football news:", error);
+        console.error("Error fetching football fixtures:", error);
     }
 }
+
+// Call the function to fetch data when the page loads
+document.addEventListener("DOMContentLoaded", fetchFootballFixtures);
+
 document.addEventListener("DOMContentLoaded", function () {
     const marketContainer = document.getElementById("market");
     const apiKey = "DZPKCFQ5I3TBGKNL"; // Replace with your actual API key
