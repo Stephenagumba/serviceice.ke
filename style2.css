@@ -277,7 +277,7 @@ footer p {
     opacity: 0.8;
 }
 #football-news {
-    background-color: white; /* Keep white background */
+    background-color: white; /* White background */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -285,18 +285,38 @@ footer p {
     margin: 20px auto;
     width: 90%;
     max-width: 1200px;
-    color: black; /* Ensure text is visible */
 }
 
+/* Title styling */
 #football-news h2 {
-    color: #ff4500; /* Highlighted color for the title */
+    color: #ff4500; /* Orange for highlight */
     font-size: 24px;
-    margin-bottom: 10px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
+/* Styling for match details */
 #fixturesContainer {
-    color: black; /* Ensure the match details are visible */
     font-size: 16px;
+    color: #333; /* Default text color */
+}
+
+/* Team names */
+.team-name {
+    color: #007bff; /* Blue for team names */
+    font-weight: bold;
+}
+
+/* Match status */
+.match-status {
+    color: #28a745; /* Green for match status */
+    font-style: italic;
+}
+
+/* Scores */
+.match-score {
+    color: #dc3545; /* Red for scores */
+    font-weight: bold;
 }
 
 .match-card {
