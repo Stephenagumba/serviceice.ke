@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("loginForm");
     const responseMessage = document.getElementById("responseMessage");
 
-    // Phone numbers and emails stored securely within the script
+    // Registered phone numbers
     const registeredNumbers = [
         "+254706127473", "+254728309076", "+254723504480", "+254722760727",
         "+254721561704", "+254708352126", "+254724155915", "+254722856806",
@@ -11,11 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
         "+254708157114", "+254790571706", "+254745185624", "+254700547122",
         "+254742542068", "+254728662275", "+254725014732", "+254721444591",
         "+254746947646", "+254707968116", "+254728325799", "+254721658950",
-        "+254721213854", "+254718722515", "+254715833067","+254704099049","+254748999339",
-        " 254790571706", "+254742812657",  "+254700547122","+254746491089","+254780898618",
-        "+254722760727",  "+254729803069"
+        "+254721213854", "+254718722515", "+254715833067", "+254704099049",
+        "+254748999339", "+254790571706", "+254742812657", "+254700547122",
+        "+254746491089", "+254780898618", "+254722760727", "+254729803069"
     ];
 
+    // List of emails
     const emails = [
         "rotedamsteve95@gmail.com", "stevethopi234@gmail.com", "hakisteve87@gmail.com",
         "tekonatrea234@gmail.com", "goffidukes345@gmail.com", "derasteve56@gmail.com",
@@ -29,23 +30,30 @@ document.addEventListener("DOMContentLoaded", function () {
         "stevechampion345@gmail.com"
     ];
 
+    // Login credentials
     const showmax1 = { email: "stevejupiter52@gmail.com", password: "2025New@2025" };
     const Netflix = { email: "stevejupiter52@gmail.com", password: "pass@2025" };
     const primevideo = { email: "ochisteve9565@gmail.com", password: "pass@2025" };
     const showmax2 = { email: "geographical.geo360@gmail.com", password: "Exit@20244" };
     const commonPassword = "pass@2025";
 
+    function formatPhone(phone) {
+        if (phone.startsWith("07")) {
+            return "+254" + phone.slice(1);
+        }
+        return phone;
+    }
+
     function getStoredLogin(phone) {
-        const storedData = JSON.parse(localStorage.getItem(phone));
-        if (storedData) {
-            const storedTime = new Date(storedData.timestamp);
-            const now = new Date();
-            const timeDiff = now - storedTime;
-            const daysPassed = timeDiff / (1000 * 60 * 60 * 24);
-            
-            if (daysPassed < 30) {
-                return storedData; // Return the same login details if within 30 days
-            }
+        const storedData = localStorage.getItem(phone);
+        if (!storedData) return null;
+        const parsedData = JSON.parse(storedData);
+        
+        // Check if stored data is within 30 days
+        const storedTime = new Date(parsedData.timestamp);
+        const now = new Date();
+        if ((now - storedTime) / (1000 * 60 * 60 * 24) < 30) {
+            return parsedData;
         }
         return null;
     }
@@ -62,10 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function generateLogins(phone) {
-        // Convert phone number format
-        const formattedPhone = phone.replace("+254", "07");
+        phone = formatPhone(phone);
 
-        // Check if phone number is registered
         if (!registeredNumbers.includes(phone)) {
             responseMessage.style.display = "block";
             responseMessage.style.color = "red";
@@ -79,18 +85,16 @@ document.addEventListener("DOMContentLoaded", function () {
             loginData = storeLogin(phone, randomEmail);
         }
 
-        const clientIP = "Fetching...";
         const clientDevice = navigator.userAgent;
         const currentTime = new Date().toLocaleString();
 
-        // Display login details
         responseMessage.style.display = "block";
         responseMessage.style.color = "white";
         responseMessage.style.backgroundColor = "#007bff";
         responseMessage.style.padding = "15px";
         responseMessage.style.borderRadius = "5px";
         responseMessage.innerHTML = `
-            <strong>Dear ${formattedPhone},</strong><br><br>
+            <strong>Dear ${phone.replace("+254", "07")},</strong><br><br>
             <strong>Your new DStv stream logins:</strong><br>
             Email: <strong>${loginData.email}</strong><br>
             Password: <strong>${commonPassword}</strong><br><br>
@@ -99,29 +103,32 @@ document.addEventListener("DOMContentLoaded", function () {
             Email: <strong>${showmax1.email}</strong><br>
             Password: <strong>${showmax1.password}</strong><br><br>
 
-            <strong>prime video:</strong><br>
+            <strong>Prime Video:</strong><br>
             Email: <strong>${primevideo.email}</strong><br>
             Password: <strong>${primevideo.password}</strong><br><br>
 
             <strong>Netflix:</strong><br>
             Email: <strong>${Netflix.email}</strong><br>
             Password: <strong>${Netflix.password}</strong><br><br>
-            
 
-            <strong>Client IP:</strong> ${clientIP}<br>
+            <strong>Client IP:</strong> <span id="clientIp">Fetching...</span><br>
             <strong>Time:</strong> ${currentTime}<br>
             <strong>Device:</strong> ${clientDevice}<br><br>
-
-            
 
             <em>Your logins are generated from Ice Services server (USA).</em><br>
             <strong style="color: red;">🚫 Sharing of logins is prohibited 🚫</strong><br><br>
 
             <span style="color: yellow;">You will receive the same logins until 30 days have passed.</span>
         `;
+
+        fetch("https://ipinfo.io/json")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("clientIp").innerText = data.ip;
+            })
+            .catch(error => console.error("Error fetching IP:", error));
     }
 
-    // Form submission event
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
         const phone = phoneInput.value.trim();
