@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     const showmax1 = { email: "stevejupiter52@gmail.com", password: "2025New@2025" };
+    const showmax1 = { email: "stevejupiter52@gmail.com", password: "pass@2025" };
     const primevideo = { email: "ochisteve9565@gmail.com", password: "pass@2025" };
     const showmax2 = { email: "geographical.geo360@gmail.com", password: "Exit@20244" };
     const commonPassword = "pass@2025";
