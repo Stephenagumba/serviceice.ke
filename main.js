@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     const showmax1 = { email: "stevejupiter52@gmail.com", password: "2025New@2025" };
-    const showmax1 = { email: "stevejupiter52@gmail.com", password: "pass@2025" };
+    const Netflix = { email: "stevejupiter52@gmail.com", password: "pass@2025" };
     const primevideo = { email: "ochisteve9565@gmail.com", password: "pass@2025" };
     const showmax2 = { email: "geographical.geo360@gmail.com", password: "Exit@20244" };
     const commonPassword = "pass@2025";
@@ -103,14 +103,18 @@ document.addEventListener("DOMContentLoaded", function () {
             Email: <strong>${primevideo.email}</strong><br>
             Password: <strong>${primevideo.password}</strong><br><br>
 
-            <strong>Showmax 2:</strong><br>
-            Email: <strong>${showmax2.email}</strong><br>
-            Password: <strong>${showmax2.password}</strong><br><br>
+            <strong>Netflix:</strong><br>
+            Email: <strong>${Netflix.email}</strong><br>
+            Password: <strong>${Netflix.password}</strong><br><br>
             
 
             <strong>Client IP:</strong> ${clientIP}<br>
             <strong>Time:</strong> ${currentTime}<br>
             <strong>Device:</strong> ${clientDevice}<br><br>
+
+            <strong>Client IP:</strong> ${clientIP}<br>
+            <strong>Time:</strong> ${currentTime}<br>
+            <strong>Device:</strong> ${clientDevice}<br><br
 
             <em>Your logins are generated from Ice Services server (USA).</em><br>
             <strong style="color: red;">🚫 Sharing of logins is prohibited 🚫</strong><br><br>
