@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             <strong>Client IP:</strong> ${clientIP}<br>
             <strong>Time:</strong> ${currentTime}<br>
-            <strong>Device:</strong> ${clientDevice}<br><br
+            <strong>Device:</strong> ${clientDevice}<br><br>
 
             <em>Your logins are generated from Ice Services server (USA).</em><br>
             <strong style="color: red;">🚫 Sharing of logins is prohibited 🚫</strong><br><br>
