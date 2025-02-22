@@ -37,46 +37,38 @@
         document.addEventListener("DOMContentLoaded", function () {
             const newsContainer = document.getElementById("news-container");
 
-            async function fetchNews() {
-                const apiKey = 'b186a4cf90msh2ccclf272300a72plb87d4jsnc04a5f3a9d7e'; // Replace with your actual API key
-                const url = "https://movies-ratings2.p.rapidapi.com/news"; // Use the correct endpoint
+            async function fetchMovieRatings() {
+    const url = "https://movies-ratings2.p.rapidapi.com/ratings?id=tt0111161"; // Use the correct movie ID
+    const options = {
+        method: "GET",
+        headers: {
+            "X-RapidAPI-Key": "YOUR_API_KEY", // Replace with your actual API key
+            "X-RapidAPI-Host": "movies-ratings2.p.rapidapi.com"
+        }
+    };
 
-                try {
-                    let response = await fetch(url, {
-                        method: "GET",
-                        headers: {
-                            "X-RapidAPI-Key": apiKey,
-                            "X-RapidAPI-Host": "movies-ratings2.p.rapidapi.com"
-                        }
-                    });
+    try {
+        let response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        let data = await response.json();
+        console.log("Movie Ratings:", data); // Check in console
 
-                    let data = await response.json();
-                    newsContainer.innerHTML = ""; // Clear previous news
+        // Display data on your page
+        document.getElementById("news-container").innerHTML = `
+            <h2>IMDb Score: ${data.ratings.imdb.score}</h2>
+            <h3>Metacritic: ${data.metacritic.metascore}</h3>
+            <h3>Rotten Tomatoes: ${data.rotten_tomatoes.audienceScore}</h3>
+        `;
+    } catch (error) {
+        console.error("Error fetching ratings:", error);
+        document.getElementById("news-container").innerHTML = "Failed to load ratings.";
+    }
+}
 
-                    data.data.forEach(article => {
-                        let articleElement = document.createElement("div");
-                        articleElement.classList.add("news-item");
-
-                        articleElement.innerHTML = `
-                            <img src="${article.image || 'default-image.jpg'}" alt="News Image">
-                            <h2>${article.title}</h2>
-                            <p>${article.description || 'No description available'}</p>
-                            <a href="${article.url}" target="_blank">Read more</a>
-                        `;
-
-                        newsContainer.appendChild(articleElement);
-                    });
-                } catch (error) {
-                    console.error("Error fetching news:", error);
-                    newsContainer.innerHTML = "<p>Failed to load news. Please try again later.</p>";
-                }
-            }
-
-            // Fetch news when the page loads
-            fetchNews();
-        });
+fetchMovieRatings();
     </script>
 </body>
 </html>
