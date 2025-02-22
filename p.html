@@ -38,14 +38,12 @@
     const newsContainer = document.getElementById("news-container");
 
     async function fetchTasteDiveRecommendations() {
-        const query = "inception"; // Change this to any movie, music, or book
-        const apiKey = "1046623-Stepheno-5DFBC21B"; // Your TasteDive API key
+        const query = "inception"; // Change to any movie
+        const apiKey = "1046623-Stepheno-5DFBC21B"; // Use your key
         const url = `https://tastedive.com/api/similar?q=${encodeURIComponent(query)}&type=movie&info=1&k=${apiKey}`;
 
         try {
             const response = await fetch(url);
-            console.log("Status:", response.status);
-
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -53,24 +51,23 @@
             const data = await response.json();
             console.log("API Response:", data);
 
-            if (!data.Similar || !data.Similar.Results || data.Similar.Results.length === 0) {
+            if (!data.Similar || !data.Similar.results || data.Similar.results.length === 0) {
                 throw new Error("No recommendations found.");
             }
 
-            // Extracting recommendations
-            let recommendations = data.Similar.Results.map(item => `
+            // Display Recommendations
+            let recommendations = data.Similar.results.map(item => `
                 <div>
                     <h3>${item.Name}</h3>
-                    <p>Type: ${item.Type}</p>
-                    <p>Description: ${item.wTeaser}</p>
-                    <a href="${item.wUrl}" target="_blank">More Info</a>
+                    <p><strong>Description:</strong> ${item.description || "No description available."}</p>
+                    <a href="${item.wUrl}" target="_blank">Wikipedia</a> |
+                    <a href="${item.yUrl}" target="_blank">YouTube</a>
                 </div>
                 <hr>
             `).join("");
 
-            // Displaying results in the container
             newsContainer.innerHTML = `
-                <h2>TasteDive Recommendations</h2>
+                <h2>Movie Recommendations</h2>
                 ${recommendations}
             `;
 
