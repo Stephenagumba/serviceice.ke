@@ -37,48 +37,50 @@
         document.addEventListener("DOMContentLoaded", function () {
     const newsContainer = document.getElementById("news-container");
 
-    async function fetchFootballOdds() {
-        const url = "https://api-football-v1.p.rapidapi.com/v2/odds/league/86592/bookmaker/5?page=2"; // Update with the correct URL
-        const options = {
-            method: "GET",
-            headers: {
-                "X-RapidAPI-Key": "3e1da38876msh335833aed7d6fe0p1i0b6ojsnfcf9cc8a9e6 ", // Replace with your actual API key
-                "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
-            }
-        };
+    async function fetchTasteDiveRecommendations() {
+        const query = "inception"; // Change this to any movie, music, or book
+        const apiKey = "1046623-Stepheno-5DFBC21B"; // Your TasteDive API key
+        const url = `https://tastedive.com/api/similar?q=${encodeURIComponent(query)}&type=movie&info=1&k=${apiKey}`;
 
         try {
-            const response = await fetch(url, options);
-            console.log("Response status:", response.status);
+            const response = await fetch(url);
+            console.log("Status:", response.status);
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log("API Response:", data); // Check response structure in console
+            console.log("API Response:", data);
 
-            if (!data.api || !data.api.odds || data.api.odds.length === 0) {
-                throw new Error("No odds data found");
+            if (!data.Similar || !data.Similar.Results || data.Similar.Results.length === 0) {
+                throw new Error("No recommendations found.");
             }
 
-            // Extracting relevant data
-            const odds = data.api.odds[0]; // Adjust based on the actual API response
+            // Extracting recommendations
+            let recommendations = data.Similar.Results.map(item => `
+                <div>
+                    <h3>${item.Name}</h3>
+                    <p>Type: ${item.Type}</p>
+                    <p>Description: ${item.wTeaser}</p>
+                    <a href="${item.wUrl}" target="_blank">More Info</a>
+                </div>
+                <hr>
+            `).join("");
 
-            // Display the data
+            // Displaying results in the container
             newsContainer.innerHTML = `
-                <h2>Football Odds</h2>
-                <p>Match: ${odds.match}</p>
-                <p>Bookmaker: ${odds.bookmaker_name}</p>
-                <p>Odd Type: ${odds.odds_type}</p>
-                <p>Value: ${odds.value}</p>
+                <h2>TasteDive Recommendations</h2>
+                ${recommendations}
             `;
+
         } catch (error) {
-            console.error("Error fetching football odds:", error);
-            newsContainer.innerHTML = "Failed to load football odds.";
+            console.error("Error fetching recommendations:", error);
+            newsContainer.innerHTML = "Failed to load recommendations.";
         }
     }
 
-    fetchFootballOdds();
+    fetchTasteDiveRecommendations();
 });
             
     </script>
