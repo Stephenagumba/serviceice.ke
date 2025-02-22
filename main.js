@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     // Login credentials
-    const showmax1 = { email: "stevejupiter52@gmail.com", password: "2025New@2025" };
-    const Netflix = { email: "stevejupiter52@gmail.com", password: "pass@2025" };
-    const primevideo = { email: "ochisteve9565@gmail.com", password: "pass@2025" };
+    const showmax1 = { email: "fistempire283@gmail.com", password: "2025New@2025" };
+    const Netflix = { email: "stevejupiter52@gmail.com", password: "Net@2025" };
+    const primevideo = { email: "ochisteve952342@gmail.com ", password: "pass@2025" };
     const showmax2 = { email: "geographical.geo360@gmail.com", password: "Exit@20244" };
     const commonPassword = "pass@2025";
 
@@ -103,6 +103,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <strong>Other logins (Showmax):</strong><br>
             Email: <strong>${showmax1.email}</strong><br>
             Password: <strong>${showmax1.password}</strong><br><br>
+
+            <strong>Other logins (Showmax):</strong><br>
+            Email: <strong>${showmax2.email}</strong><br>
+            Password: <strong>${showmax2.password}</strong><br><br>
 
             <strong>Prime Video:</strong><br>
             Email: <strong>${primevideo.email}</strong><br>
