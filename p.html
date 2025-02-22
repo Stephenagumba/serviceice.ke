@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV News</title>
+    <link rel="stylesheet" href="ps.css">
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>TV News</h1>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Trending</a></li>
+                <li><a href="#">Reviews</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="news-container">
+            <!-- News articles will be injected here -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 TV News | Follow us on 
+            <a href="#"><i class="fab fa-twitter"></i></a> 
+            <a href="#"><i class="fab fa-facebook"></i></a> 
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const newsContainer = document.getElementById("news-container");
+
+            async function fetchNews() {
+                try {
+                    let response = await fetch("https://newsapi.org/v2/top-headlines?category=entertainment&apiKey=dfc090f1c285fe78514fbd8c825ba009");
+                    let data = await response.json();
+
+                    data.articles.forEach(article => {
+                        let articleElement = document.createElement("div");
+                        articleElement.classList.add("news-item");
+                        articleElement.innerHTML = `
+                            <img src="${article.urlToImage}" alt="News Image">
+                            <h2>${article.title}</h2>
+                            <p>${article.description}</p>
+                            <a href="${article.url}" target="_blank">Read more</a>
+                        `;
+                        newsContainer.appendChild(articleElement);
+                    });
+                } catch (error) {
+                    console.error("Error fetching news:", error);
+                }
+            }
+            fetchNews();
+        });
+    </script>
+</body>
+</html>
