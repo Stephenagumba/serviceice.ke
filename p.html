@@ -35,40 +35,52 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const newsContainer = document.getElementById("news-container");
+    const newsContainer = document.getElementById("news-container");
 
-            async function fetchMovieRatings() {
-    const url = "https://movies-ratings2.p.rapidapi.com/ratings?id=tt0111161"; // Use the correct movie ID
-    const options = {
-        method: "GET",
-        headers: {
-            "X-RapidAPI-Key": "YOUR_API_KEY", // Replace with your actual API key
-            "X-RapidAPI-Host": "movies-ratings2.p.rapidapi.com"
+    async function fetchFootballOdds() {
+        const url = "https://api-football-v1.p.rapidapi.com/v2/odds/league/86592/bookmaker/5?page=2"; // Update with the correct URL
+        const options = {
+            method: "GET",
+            headers: {
+                "X-RapidAPI-Key": "3e1da38876msh35383aed7d6e9p010d6jsnfc9e9c9e", // Replace with your actual API key
+                "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
+            }
+        };
+
+        try {
+            const response = await fetch(url, options);
+            console.log("Response status:", response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("API Response:", data); // Check response structure in console
+
+            if (!data.api || !data.api.odds || data.api.odds.length === 0) {
+                throw new Error("No odds data found");
+            }
+
+            // Extracting relevant data
+            const odds = data.api.odds[0]; // Adjust based on the actual API response
+
+            // Display the data
+            newsContainer.innerHTML = `
+                <h2>Football Odds</h2>
+                <p>Match: ${odds.match}</p>
+                <p>Bookmaker: ${odds.bookmaker_name}</p>
+                <p>Odd Type: ${odds.odds_type}</p>
+                <p>Value: ${odds.value}</p>
+            `;
+        } catch (error) {
+            console.error("Error fetching football odds:", error);
+            newsContainer.innerHTML = "Failed to load football odds.";
         }
-    };
-
-    try {
-        let response = await fetch(url, options);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        let data = await response.json();
-        console.log("Movie Ratings:", data); // Check in console
-
-        // Display data on your page
-        document.getElementById("news-container").innerHTML = `
-            <h2>IMDb Score: ${data.ratings.imdb.score}</h2>
-            <h3>Metacritic: ${data.metacritic.metascore}</h3>
-            <h3>Rotten Tomatoes: ${data.rotten_tomatoes.audienceScore}</h3>
-        `;
-    } catch (error) {
-        console.error("Error fetching ratings:", error);
-        document.getElementById("news-container").innerHTML = "Failed to load ratings.";
     }
-}
 
-fetchMovieRatings();
+    fetchFootballOdds();
+});
+            
     </script>
 </body>
 </html>
