@@ -34,22 +34,36 @@
     </footer>
 
     <script>
-        const apiKey = "qKVsZhoUuDgHrIKzfMddqA==HNrTaBIQqqLhZwZ9"; // Replace with your actual API key
-const endpoint = "https://api.api-ninjas.com/v1/movies?title=inception"; // Example endpoint
+        
+   document.addEventListener("DOMContentLoaded", () => {
+    const apiKey = "qKVsZhoUuDgHrIKzfMddqA==HNrTaBIQqqLhZwZ9"; // Replace with your actual API key
+    const endpoint = "https://api.api-ninjas.com/v1/movies?title=inception"; // Example endpoint
 
-fetch(endpoint, {
-    method: "GET",
-    headers: {
-        "X-Api-Key": apiKey
-    }
-})
-.then(response => response.json())
-.then(data => {
-    console.log(data); // Process and display data on your website
-})
-.catch(error => console.error("Error fetching data:", error));
-          
-   
+    fetch(endpoint, {
+        method: "GET",
+        headers: { "X-Api-Key": apiKey }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("API Data:", data);
+        if (data.length === 0) {
+            console.warn("No data received.");
+        } else {
+            // Example: Display the first movie title in the news container
+            document.getElementById("news-container").innerHTML = `
+                <h2>${data[0].title}</h2>
+                <p>Year: ${data[0].year}</p>
+                <p>Genre: ${data[0].genre}</p>
+            `;
+        }
+    })
+    .catch(error => console.error("Error fetching data:", error));
+});
     </script>
 </body>
 </html>
