@@ -34,47 +34,22 @@
     </footer>
 
     <script>
-        
-            document.addEventListener("DOMContentLoaded", async function () {
-    const newsContainer = document.getElementById("news-container");
-    const bearerToken = "AAAAAAAAAAAAAAAAAAAAADvrzQEAAAAA0fSfIYdrySYSbaQagMVKnnuIUEY%3DQh8b3cOfvwdmskvmhVgu3WJ1kcTBGsEMXoasXdJbeORdE7Qg94"; // Replace with your actual token
+        const apiKey = "YOUR_API_KEY"; // Replace with your actual API key
+const endpoint = "https://api.api-ninjas.com/v1/movies?title=inception"; // Example endpoint
 
-    async function fetchTweets() {
-        const query = "tv news"; // Modify this based on what you want to search
-        const url = `https://api.twitter.com/2/tweets/search/recent?query=${encodeURIComponent(query)}&tweet.fields=created_at,author_id`;
-
-        try {
-            const response = await fetch(url, {
-                headers: {
-                    "Authorization": `Bearer ${bearerToken}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            console.log("Twitter API Response:", data);
-
-            let tweets = data.data.map(tweet => `
-                <div>
-                    <p><strong>Tweet:</strong> ${tweet.text}</p>
-                    <p><em>Posted at: ${tweet.created_at}</em></p>
-                </div>
-                <hr>
-            `).join("");
-
-            newsContainer.innerHTML = `<h2>Latest Tweets on TV News</h2>${tweets}`;
-
-        } catch (error) {
-            console.error("Error fetching tweets:", error);
-            newsContainer.innerHTML = "Failed to load tweets.";
-        }
+fetch(endpoint, {
+    method: "GET",
+    headers: {
+        "X-Api-Key": apiKey
     }
-
-    fetchTweets();
-});
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data); // Process and display data on your website
+})
+.catch(error => console.error("Error fetching data:", error));
+          
+   
     </script>
 </body>
 </html>
