@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ice Services TV Network</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Video.js CSS -->
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <script defer src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
             background: black;
@@ -22,116 +22,77 @@
             font-size: 24px;
             font-weight: bold;
         }
-        .video-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+        .container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        select {
+            padding: 10px;
+            font-size: 18px;
+            width: 80%;
+            max-width: 400px;
+            margin: 10px auto;
+            display: block;
         }
         .video-container {
             width: 90%;
             max-width: 800px;
-            aspect-ratio: 16/9;
-            background: #222;
+            margin: auto;
             border: 2px solid red;
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 20px;
+            background: #222;
         }
-        #channelList {
-            width: 90%;
-            max-width: 800px;
-            margin-bottom: 20px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        @media (min-width: 1024px) {
-            .video-grid {
-                padding: 40px;
-            }
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
         }
     </style>
 </head>
 <body>
-    <header>
-        Ice Services TV Network
-    </header>
-    <main>
-        <div class="video-grid">
-            <!-- Channel Selection Dropdown -->
-            <select id="channelList">
-                <option value="">Select a channel</option>
-            </select>
-            <!-- Video.js Player -->
-            <div class="video-container">
-                <video
-                    id="videoPlayer"
-                    class="video-js vjs-default-skin"
-                    controls
-                    preload="auto"
-                    width="100%"
-                    height="100%"
-                    data-setup='{}'
-                >
-                    <source src="" type="application/x-mpegURL" />
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </main>
 
-    <!-- Video.js JavaScript -->
-    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
-    <!-- HLS.js for m3u8 support -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <!-- Custom Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const channelList = document.getElementById('channelList');
-            const videoPlayer = videojs('videoPlayer');
+<header>
+    Ice Services TV Network
+</header>
 
-            // Fetch and parse the M3U playlist
-            fetch('https://iptv-org.github.io/iptv/index.m3u')
-                .then(response => response.text())
-                .then(data => {
-                    const lines = data.split('\\n');
-                    let currentChannel = {};
-                    lines.forEach(line => {
-                        if (line.startsWith('#EXTINF:')) {
-                            const info = line.split(',');
-                            currentChannel.name = info[1].trim();
-                        } else if (line && !line.startsWith('#')) {
-                            currentChannel.url = line.trim();
-                            // Add channel to the dropdown
-                            const option = document.createElement('option');
-                            option.value = currentChannel.url;
-                            option.textContent = currentChannel.name;
-                            channelList.appendChild(option);
-                            // Reset currentChannel
-                            currentChannel = {};
-                        }
-                    });
-                })
-                .catch(error => console.error('Error fetching the M3U playlist:', error));
+<div class="container">
+    <select id="channelSelect" onchange="playChannel()">
+        <option value="">Select a channel</option>
+        <option value="https://iptv-org.github.io/iptv/countries/us.m3u8">US Channels</option>
+        <option value="https://iptv-org.github.io/iptv/countries/uk.m3u8">UK Channels</option>
+        <option value="https://iptv-org.github.io/iptv/categories/movies.m3u8">Movies</option>
+        <option value="https://iptv-org.github.io/iptv/categories/sports.m3u8">Sports</option>
+        <option value="https://iptv-org.github.io/iptv/languages/english.m3u8">English Channels</option>
+    </select>
 
-            // Handle channel selection
-            channelList.addEventListener('change', function() {
-                const selectedUrl = this.value;
-                if (selectedUrl) {
-                    if (Hls.isSupported()) {
-                        const hls = new Hls();
-                        hls.loadSource(selectedUrl);
-                        hls.attachMedia(videoPlayer.tech().el());
-                        videoPlayer.play();
-                    } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-                        videoPlayer.src({ src: selectedUrl, type: 'application/x-mpegURL' });
-                        videoPlayer.play();
-                    } else {
-                        alert('Your browser does not support HLS streaming.');
-                    }
-                }
-            });
-        });
-    </script>
+    <div class="video-container">
+        <video id="videoPlayer" controls autoplay></video>
+    </div>
+</div>
+
+<script>
+    function playChannel() {
+        const video = document.getElementById('videoPlayer');
+        const channelSelect = document.getElementById('channelSelect');
+        const url = channelSelect.value;
+
+        if (!url) {
+            alert('Please select a channel.');
+            return;
+        }
+
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = url;
+        } else {
+            alert('Your browser does not support this stream.');
+        }
+    }
+</script>
+
 </body>
 </html>
