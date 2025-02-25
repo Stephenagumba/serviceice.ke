@@ -150,3 +150,16 @@ document.addEventListener("DOMContentLoaded", function () {
         generateLogins(phone);
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        answer.classList.toggle("show");
+    }
+
+    // Attach click event to each question
+    document.querySelectorAll(".faq-question").forEach((question) => {
+        question.addEventListener("click", function () {
+            toggleFAQ(this);
+        });
+    });
+});
