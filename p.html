@@ -42,30 +42,64 @@
     </footer>
 
     <script>
-        const apiKey = 'qKVsZhoUuDgHrIKzfMddqA==HNrTaBIQqqLhZwZ9'; // Replace with your actual API key
-const celebrityName = 'Michael Jordan'; // Change this to any celebrity name
+       const apiKey = "3cd701bd0d80235d722ccec15ec15538"; // Replace with your valid API key
 
-fetch(`https://api.api-ninjas.com/v1/celebrity?name=${encodeURIComponent(celebrityName)}`, {
-    method: 'GET',
-    headers: { 'X-Api-Key': apiKey }
-})
-.then(response => response.json())
-.then(data => {
-    console.log(data);
-    if (data.length > 0) {
-        document.getElementById("celebrity-info").innerHTML = `
-            <h2>${data[0].name}</h2>
-            <p><strong>Net Worth:</strong> $${data[0].net_worth.toLocaleString()}</p>
-            <p><strong>Nationality:</strong> ${data[0].nationality.toUpperCase()}</p>
-            <p><strong>Occupation:</strong> ${data[0].occupation.join(", ")}</p>
-            <p><strong>Birthday:</strong> ${data[0].birthday}</p>
-            <p><strong>Height:</strong> ${data[0].height}m</p>
-        `;
-    } else {
-        document.getElementById("celebrity-info").innerHTML = `<p>No celebrity found.</p>`;
+// API endpoint for fetching live fixtures
+const apiUrl = "https://v3.football.api-sports.io/fixtures?live=all";
+
+// Function to fetch and display football fixtures
+async function fetchFootballFixtures() {
+    try {
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "x-apisports-key": apiKey,
+                "Accept": "application/json"
+            }
+        });
+
+        console.log("Response Status:", response.status); // Debugging
+
+        if (!response.ok) {
+            console.error("API Error:", response.statusText);
+            return;
+        }
+
+        const data = await response.json();
+        console.log("API Response:", data); // Log the full response
+
+        // Validate response
+        if (!data || !data.response || data.response.length === 0) {
+            console.error("No live matches found.");
+            return;
+        }
+
+        // Select the container to display fixtures
+        const fixturesContainer = document.getElementById("fixturesContainer");
+        fixturesContainer.innerHTML = ""; // Clear previous content
+
+        // Loop through fixtures and display them
+        data.response.forEach(match => {
+            const fixture = match.fixture || {};
+            const teams = match.teams || { home: { name: "Unknown" }, away: { name: "Unknown" } };
+            const goals = match.goals || { home: "?", away: "?" };
+
+            // Create a div for each match
+            const matchDiv = document.createElement("div");
+            matchDiv.classList.add("match-item");
+            matchDiv.innerHTML = `
+                <h3>${teams.home.name} vs ${teams.away.name}</h3>
+                <p>Status: ${fixture.status?.long || "N/A"}</p>
+                <p>Score: ${goals.home} - ${goals.away}</p>
+            `;
+
+            fixturesContainer.appendChild(matchDiv);
+        });
+
+    } catch (error) {
+        console.error("Error fetching football fixtures:", error);
     }
-})
-.catch(error => console.error('Error fetching data:', error));
+}
     </script>
 </body>
 </html>
