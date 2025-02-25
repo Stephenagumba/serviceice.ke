@@ -4,95 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ice Services TV Network</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="ps.css">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <style>
-        body {
-            background: black;
-            color: white;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: linear-gradient(to right, blue, red);
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .container {
-            margin-top: 20px;
-            text-align: center;
-        }
-        select {
-            padding: 10px;
-            font-size: 18px;
-            width: 80%;
-            max-width: 400px;
-            margin: 10px auto;
-            display: block;
-        }
-        .video-container {
-            width: 90%;
-            max-width: 800px;
-            margin: auto;
-            border: 2px solid red;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #222;
-        }
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-    </style>
 </head>
 <body>
 
-<header>
-    Ice Services TV Network
-</header>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">Ice Services TV</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">Live TV</a></li>
+                <li><a href="#">Sports</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="container">
-    <select id="channelSelect" onchange="playChannel()">
-        <option value="">Select a channel</option>
-        <option value="https://iptv-org.github.io/iptv/countries/us.m3u8">US Channels</option>
-        <option value="https://iptv-org.github.io/iptv/countries/uk.m3u8">UK Channels</option>
-        <option value="https://iptv-org.github.io/iptv/categories/movies.m3u8">Movies</option>
-        <option value="https://iptv-org.github.io/iptv/categories/sports.m3u8">Sports</option>
-        <option value="https://iptv-org.github.io/iptv/languages/english.m3u8">English Channels</option>
-    </select>
-
-    <div class="video-container">
+    <!-- Video Player -->
+    <section class="player-container">
         <video id="videoPlayer" controls autoplay></video>
-    </div>
-</div>
+    </section>
 
-<script>
-    function playChannel() {
-        const video = document.getElementById('videoPlayer');
-        const channelSelect = document.getElementById('channelSelect');
-        const url = channelSelect.value;
+    <!-- Channel List -->
+    <section class="channel-list">
+        <h2>Select a Channel</h2>
+        <div id="channels"></div>
+    </section>
 
-        if (!url) {
-            alert('Please select a channel.');
-            return;
-        }
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Ice Services TV Network. All rights reserved.</p>
+    </footer>
 
-        if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(url);
-            hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = url;
-        } else {
-            alert('Your browser does not support this stream.');
-        }
-    }
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
