@@ -1,10 +1,12 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ice Services TV Network</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style>
         body {
             background: black;
@@ -22,30 +24,29 @@
         }
         .video-grid {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
         .video-container {
             width: 90%;
-            max-width: 500px;
+            max-width: 800px;
             aspect-ratio: 16/9;
             background: #222;
             border: 2px solid red;
             border-radius: 10px;
             overflow: hidden;
+            margin-bottom: 20px;
         }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        #channelList {
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
         }
         @media (min-width: 1024px) {
             .video-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px;
                 padding: 40px;
             }
         }
@@ -54,48 +55,83 @@
 <body>
     <header>
         Ice Services TV Network
-    </header><main>
-    <div class="video-grid" id="videoGrid">
-        <!-- Videos will be injected dynamically -->
-    </div>
-</main>
+    </header>
+    <main>
+        <div class="video-grid">
+            <!-- Channel Selection Dropdown -->
+            <select id="channelList">
+                <option value="">Select a channel</option>
+            </select>
+            <!-- Video.js Player -->
+            <div class="video-container">
+                <video
+                    id="videoPlayer"
+                    class="video-js vjs-default-skin"
+                    controls
+                    preload="auto"
+                    width="100%"
+                    height="100%"
+                    data-setup='{}'
+                >
+                    <source src="" type="application/x-mpegURL" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </main>
 
-<script>
-    const videos = [
-    "https://www.youtube.com/embed/OlbOOzX_fDs", 
-    "https://www.youtube.com/embed/daqB3i9WYIY",
-    "https://www.youtube.com/embed/YDvsBbKfLPA",
-    "https://www.youtube.com/embed/80MaYh4ksQk",
-    "https://www.youtube.com/embed/gCNeDWCI0vo",
-    "https://www.youtube.com/embed/n1qOgABPoa0",
-    "https://www.youtube.com/embed/h4cpb5T51Uo",
-    "https://www.youtube.com/embed/xRPjKQtRXR8",
-    "https://www.youtube.com/embed/g_LfOCTGXp4",
-    "https://www.youtube.com/embed/KbqR2QnysKE",
-    "https://www.youtube.com/embed/6qIfYUHGZiE",
-    "https://www.youtube.com/embed/H0jL7qrktA8",
-    "https://www.youtube.com/embed/Ap-UM1O9RBU",
-    "https://www.youtube.com/embed/AFNDtt-PUlg",
-    "https://www.youtube.com/embed/qA2HKjKCk8s",
-    "https://www.youtube.com/embed/sGQYPNeOAKQ",
-    "https://www.youtube.com/embed/DbIUUedwNfU",
-    
-];
-    
-    const videoGrid = document.getElementById("videoGrid");
-    
-    videos.forEach(url => {
-        const div = document.createElement("div");
-        div.classList.add("video-container");
-        
-        const iframe = document.createElement("iframe");
-        iframe.src = url;
-        iframe.allowFullscreen = true;
-        
-        div.appendChild(iframe);
-        videoGrid.appendChild(div);
-    });
-</script>
+    <!-- Video.js JavaScript -->
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <!-- HLS.js for m3u8 support -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const channelList = document.getElementById('channelList');
+            const videoPlayer = videojs('videoPlayer');
 
+            // Fetch and parse the M3U playlist
+            fetch('https://iptv-org.github.io/iptv/index.m3u')
+                .then(response => response.text())
+                .then(data => {
+                    const lines = data.split('\\n');
+                    let currentChannel = {};
+                    lines.forEach(line => {
+                        if (line.startsWith('#EXTINF:')) {
+                            const info = line.split(',');
+                            currentChannel.name = info[1].trim();
+                        } else if (line && !line.startsWith('#')) {
+                            currentChannel.url = line.trim();
+                            // Add channel to the dropdown
+                            const option = document.createElement('option');
+                            option.value = currentChannel.url;
+                            option.textContent = currentChannel.name;
+                            channelList.appendChild(option);
+                            // Reset currentChannel
+                            currentChannel = {};
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching the M3U playlist:', error));
+
+            // Handle channel selection
+            channelList.addEventListener('change', function() {
+                const selectedUrl = this.value;
+                if (selectedUrl) {
+                    if (Hls.isSupported()) {
+                        const hls = new Hls();
+                        hls.loadSource(selectedUrl);
+                        hls.attachMedia(videoPlayer.tech().el());
+                        videoPlayer.play();
+                    } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+                        videoPlayer.src({ src: selectedUrl, type: 'application/x-mpegURL' });
+                        videoPlayer.play();
+                    } else {
+                        alert('Your browser does not support HLS streaming.');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
