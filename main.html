@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="style.css" />
   <script defer src="main.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 </head>
 <body>
   <!-- NAVBAR -->
@@ -22,63 +26,31 @@
   <div class="container">
     <h2>Enter Your Phone Number</h2>
     <form id="loginForm">
-      <input type="text" id="phone" name="phone" placeholder="e.g. 0725014732 or +254725014732" required>
-      <button type="submit">Get Login</button>
+      <input type="text" id="phone" name="phone" placeholder="e.g. +254725014732" required>
+      <button type="button" id="sendOtp">Send OTP</button>
     </form>
+
+    <div id="otpSection" style="display: none;">
+      <h3>Enter OTP</h3>
+      <input type="text" id="otp" placeholder="Enter OTP" required>
+      <button type="button" id="verifyOtp">Verify OTP</button>
+    </div>
+
     <div id="responseMessage"></div>
+
+    <div id="recaptcha-container"></div>
   </div>
+
+  <!-- INFO BOX -->
   <div class="info-box">
-  <p>* Start with 254 on your phone number</p>
-  <p>* Ensure no spacing between your numbers</p>
-  <p>* If your generated password is incorrect for that email, try <strong style="color:yellow;">pass@2026</strong> (all small letters)</p>
-  <p>* If you encounter a streaming limit, please contact admin with a screenshot of your email</p>
-  <p>* Netflix accounts are only available through WhatsApp</p>
-  <button onclick="window.location.href='https://wa.me/254700338057'">Click here</button>
-  </div>
-
-  <!-- WHY CHOOSE US -->
-  <div class="why-choose">
-    <h2>Why Choose Us?</h2>
-    <div class="features">
-      <div class="feature"><i class="fa fa-bolt"></i><p>Fast & Secure</p></div>
-      <div class="feature"><i class="fa fa-money-bill-wave"></i><p>Affordable Plans</p></div>
-      <div class="feature"><i class="fa fa-headset"></i><p>24/7 Support</p></div>
-      <div class="feature"><i class="fa fa-thumbs-up"></i><p>Trusted by Thousands</p></div>
-    </div>
-  </div>
-
-  <!-- OUR SERVICES -->
-  <div class="services">
-    <h2>Our Services</h2>
-    <div class="services-grid">
-      <div class="service-box">DStv Account Management</div>
-      <div class="service-box">Subscription Renewals</div>
-      <div class="service-box">Technical Support</div>
-      <div class="service-box">Special Offers</div>
-    </div>
-  </div>
-
-  <!-- FAQ SECTION -->
-  <div class="faq">
-    <h2>FAQs</h2>
-    <div class="faq-item">
-      <p class="faq-question" onclick="toggleFAQ(this)">How do I log in?</p>
-      <p class="faq-answer">Enter your phone number to receive your login details via our system.</p>
-    </div>
-    <div class="faq-item">
-      <p class="faq-question" onclick="toggleFAQ(this)">Are the logins secure?</p>
-      <p class="faq-answer">Yes, our logins are generated securely and can be reused for 30 days.</p>
-    </div>
-    <div class="faq-item">
-      <p class="faq-question" onclick="toggleFAQ(this)">Can I share my login details?</p>
-      <p class="faq-answer">No, sharing of login details is strictly prohibited.</p>
-    </div>
+    <p>* Start with +254 on your phone number</p>
+    <p>* Ensure no spacing between your numbers</p>
+    <p>* If your generated password is incorrect, try <strong style="color:yellow;">pass@2026</strong></p>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
     <p>© 2025 Ice Services. All Rights Reserved.</p>
   </footer>
-  
 </body>
 </html>
