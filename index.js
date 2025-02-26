@@ -17,9 +17,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+console.log("Firebase initialized:", db ? "Success" : "Failed");
+
 async function validateLogin() {
     let phoneInput = document.getElementById("phone").value.trim();
     let errorMessage = document.getElementById("error-message");
+
+    console.log("Phone input:", phoneInput);
 
     if (!/^(07\d{8})$/.test(phoneInput)) {
         errorMessage.textContent = "Invalid phone number. Must be 10 digits starting with 07.";
@@ -28,6 +32,7 @@ async function validateLogin() {
 
     try {
         const phoneDoc = await getDoc(doc(db, "validNumbers", phoneInput));
+        console.log("Checking Firestore:", phoneDoc.exists());
 
         if (phoneDoc.exists()) {
             window.location.href = "main.html"; // Redirect if registered
@@ -41,8 +46,11 @@ async function validateLogin() {
     }
 }
 
-// Attach event listener to button
-document.getElementById("submitButton").addEventListener("click", validateLogin);
+// Attach event listener
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("submitButton").addEventListener("click", validateLogin);
+    console.log("Event listener attached to submit button");
+});
 
 // Prevent dev tools access
 document.addEventListener("keydown", function(event) {
