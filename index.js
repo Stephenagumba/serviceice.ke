@@ -58,3 +58,5 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault();
     }
 });
+console.log(db ? "Firestore is connected" : "Firestore not initialized");
+console.log("index.js is loaded");
