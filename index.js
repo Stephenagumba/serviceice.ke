@@ -3,14 +3,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// Firebase configuration (replace with actual details)
+// Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AlzaSyAbJx4zhjAB4H7ioe74ydEK16gzls8mPoA",
+    authDomain: "service-c6155.firebaseapp.com",
+    projectId: "service-c6155",
+    storageBucket: "service-c6155.appspot.com",
+    messagingSenderId: "26435436265",
+    appId: "1:26435436265:web:620d5ff0d3130a17a78"
 };
 
 // Initialize Firebase
