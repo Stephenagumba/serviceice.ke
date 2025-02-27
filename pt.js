@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Paste your complete M3U file content below between the backticks.
     const m3uData = `
-#EXTM3U
+
 #EXTINF:-1 tvg-id="" tvg-logo="" group-title="Sports",CCTV 央视台球
 http://117.161.133.51:81/gitv_live/G_TAIQIU-CQ/G_TAIQIU-CQ.m3u8?p=GITV
 
