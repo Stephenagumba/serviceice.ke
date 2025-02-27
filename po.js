@@ -78,6 +78,17 @@ http://example.com/skysportsfootball.m3u8
 http://example.com/skysportsf1.m3u8
 #EXTINF:-1 tvg-id="WWE.us" tvg-logo="https://i.imgur.com/Wypx6Ix.png" group-title="Sports",WWE Network (720p)
 http://example.com/wwe.m3u8
+#EXTINF:-1 tvg-id="Esport3.es" tvg-logo="https://i.imgur.com/tkjUFzb.png" group-title="Sports",Esport3 (1080p) [Geo-blocked]
+https://directes-tv-cat.ccma.cat/live-origin/esport3-hls/master.m3u8
+
+#EXTINF:-1 tvg-id="ESR24x7eSportsNetwork.us" tvg-logo="https://satelliteprome.com/wp-content/uploads/2021/01/ESR-network.jpg" group-title="Sports",ESR 24x7 eSports Network (1080p)
+https://eyeonesports.com/ES2RA-628g.m3u8
+
+#EXTINF:-1 tvg-id="ESTV.us" tvg-logo="https://i.imgur.com/qHNV0f5.png" group-title="Sports",ESTV (1080p)
+https://estv-rakuten-samsung.amagi.tv/playlist.m3u8
+
+#EXTINF:-1 tvg-id="etvNewsSport.za" tvg-logo="https://i.imgur.com/lXMzsNM.png" group-title="News",ETVN (720p)
+https://origin2.afxp.telemedia.co.za/abr_kapang/enterepreneur/playlist.m3u8
     `;
 
     // Function to parse the M3U data and return an array of channel objects
