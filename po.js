@@ -56,6 +56,27 @@ https://1815337252.rsc.cdn77.org/HLS/CORNHOLETV.m3u8
 
 #EXTINF:-1 tvg-id="ActionSports.de" tvg-logo="https://i.imgur.com/xiTUsnA.png" group-title="Sports",Action Sports
 http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5be1be871843b56328bc3ef1/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84ac0870-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=a89100a8-8115-4b28-9869-072164526f31
+
+#EXTINF:-1 tvg-id="beINsports1.fr" tvg-logo="https://i.imgur.com/qC8jMiD.png" group-title="Sports",beIN Sports 1 (1080p)
+http://example.com/beinsports1.m3u8
+#EXTINF:-1 tvg-id="beINsports2.fr" tvg-logo="https://i.imgur.com/qC8jMiD.png" group-title="Sports",beIN Sports 2 (1080p)
+http://example.com/beinsports2.m3u8
+#EXTINF:-1 tvg-id="ESPN.us" tvg-logo="https://i.imgur.com/xDq9iwU.png" group-title="Sports",ESPN (720p)
+http://example.com/espn.m3u8
+#EXTINF:-1 tvg-id="FoxSports.us" tvg-logo="https://i.imgur.com/3H3sI2q.png" group-title="Sports",Fox Sports (1080p)
+http://example.com/foxsports.m3u8
+#EXTINF:-1 tvg-id="NBA.tv" tvg-logo="https://i.imgur.com/XbT3eQ9.png" group-title="Sports",NBA TV (720p)
+http://example.com/nbatv.m3u8
+#EXTINF:-1 tvg-id="Eurosport1.de" tvg-logo="https://i.imgur.com/Yz5mMHK.png" group-title="Sports",Eurosport 1 (1080p)
+http://example.com/eurosport1.m3u8
+#EXTINF:-1 tvg-id="Eurosport2.de" tvg-logo="https://i.imgur.com/Yz5mMHK.png" group-title="Sports",Eurosport 2 (1080p)
+http://example.com/eurosport2.m3u8
+#EXTINF:-1 tvg-id="SkySportsFootball.uk" tvg-logo="https://i.imgur.com/7eV5Y2F.png" group-title="Sports",Sky Sports Football (720p)
+http://example.com/skysportsfootball.m3u8
+#EXTINF:-1 tvg-id="SkySportsF1.uk" tvg-logo="https://i.imgur.com/mKqI1Vi.png" group-title="Sports",Sky Sports F1 (1080p)
+http://example.com/skysportsf1.m3u8
+#EXTINF:-1 tvg-id="WWE.us" tvg-logo="https://i.imgur.com/Wypx6Ix.png" group-title="Sports",WWE Network (720p)
+http://example.com/wwe.m3u8
     `;
 
     // Function to parse the M3U data and return an array of channel objects
