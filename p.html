@@ -37,11 +37,7 @@
         </div>
     </section>
 
-    <!-- Market Trends Section -->
-    <section id="market">
-        <h2>Global Market Trends</h2>
-        <div id="marketContainer"></div>
-    </section>
+   
 
     <footer>
         <p>&copy; 2025 TV News | Follow us on 
@@ -114,31 +110,7 @@
         // Call the function when the page loads
         document.addEventListener("DOMContentLoaded", fetchFootballFixtures);
 
-        // Market Trends Fetching
-        async function fetchMarketTrends() {
-            const marketContainer = document.getElementById("marketContainer");
-            const marketApiKey = "DZPKCFQ5I3TBGKNL"; // Replace with your actual API key
-            const url = `https://www.alphavantage.co/query?function=GLOBAL_MARKET_OVERVIEW&apikey=${marketApiKey}`;
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                console.log("Market API Response:", data); // Debugging
-
-                if (data && data.globalMarketOverview) {
-                    displayMarketTrends(data.globalMarketOverview);
-                } else {
-                    marketContainer.innerHTML = "<p>Market data not available.</p>";
-                }
-            } catch (error) {
-                console.error("Error fetching market trends:", error);
-                marketContainer.innerHTML = "<p>Failed to load market trends.</p>";
-            }
-        }
-
-        // Call Market Trends Function
-        document.addEventListener("DOMContentLoaded", fetchMarketTrends);
+       
 
     </script>
 </body>
