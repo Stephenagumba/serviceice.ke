@@ -21,16 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // List of emails
     const emails = [
-        "rotedamsteve95@gmail.com", "stevethopi234@gmail.com", "hakisteve87@gmail.com",
-        "tekonatrea234@gmail.com", "goffidukes345@gmail.com", "derasteve56@gmail.com",
-        "stevekabarnet@gmail.com", "pokeaakanji@gmail.com", "kigalisamu@gmail.com",
-        "ishangarwanda34@gmail.com", "peterrwanda34@gmail.com", "bukayosaka235@gmail.com",
-        "stevepassi@gmail.com", "missrieroni23@gmail.com", "camiisteve@gmail.com",
-        "talipakasi@gmail.com", "comtastoki@gmail.com", "stevejokey1134@gmail.com",
-        "angolistepa234@gmail.com", "malamuangola23@gmail.com", "grapilelajohn@gmail.com",
-        "davidmuisa2567@gmail.com", "jaksondomigo3421@gmail.com", "fistempire483@gmail.com",
-        "geographical.geo360@gmail.com", "stevejupiter52@gmail.com", "mobeyii765mobi@gmail.com",
-        "stevechampion345@gmail.com"
+        "rotedamsteve95@gmail.com", "stevethopi234@gmail.com"
     ];
 
     // Login credentials
