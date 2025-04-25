@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     // Login credentials
-    const showmax1 = { email: "fistempire283@gmail.com", password: "2025New@2025" };
-    const Netflix = { email: "stevejupiter52@gmail.com", password: "Net@2025" };
-    const primevideo = { email: "ochisteve952342@gmail.com ", password: "pass@2025" };
+    const showmax1 = { email: "fistempire283@gmail.com", password: "20255@pass" };
+    const Netflix = { email: "stevejupiter52@gmail.com", password: "20255@pass" };
+    const primevideo = { email: "comtastoki234@gmail.com ", password: "pass@2025" };
     const showmax2 = { email: "geographical.geo360@gmail.com", password: "Exit@20244" };
     const commonPassword = "pass@2025";
 
