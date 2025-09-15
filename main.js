@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     // Login credentials
-    const showmax1 = { email: "fistempire283@gmail.com", password: "20255@pass" };
-    const Netflix = { email: "camilastaicey@gmail.com", password: "37568607" };
-    const primevideo = { email: "comtastoki234@gmail.com ", password: "pass@2025" };
+    const showmax1 = { email: "fistempire283@gmail.com", password: "pass@202888" };
+    const Netflix = { email: "unavailable", password: "come back later" };
+    const primevideo = { email: "camiistacey127@gmail.com", password: "pass@2025" };
     const showmax2 = { email: "geographical.geo360@gmail.com", password: "Exit@20244" };
-    const showmax3 = { email: "stevejupiter52@gmail.com", password: "20255@pass" };
+    const showmax3 = { email: "akanjistephen70@gmail.com", password: "pass@202888" };
     const commonPassword = "pass@2025";
 
     function formatPhone(phone) {
