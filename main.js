@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // List of emails
     const emails = [
-        "rotedamsteve95@gmail.com", "stevethopi234@gmail.com"
+        "fistempire483@gmail.com", "mobeyii765mobi@gmail.com"
     ];
 
     // Login credentials
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const primevideo = { email: "camiistacey127@gmail.com", password: "pass@2025" };
     const showmax2 = { email: "geographical.geo360@gmail.com", password: "Exit@20244" };
     const showmax3 = { email: "akanjistephen70@gmail.com", password: "pass@202888" };
-    const commonPassword = "pass@2025";
+    const commonPassword = "pass@202888";
 
     function formatPhone(phone) {
         if (phone.startsWith("07")) {
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         responseMessage.style.borderRadius = "5px";
         responseMessage.innerHTML = `
             <strong>Dear ${phone.replace("+254", "07")},</strong><br><br>
-            <strong>Your new DStv stream logins:</strong><br>
+            <strong>Your new showmax logins:</strong><br>
             Email: <strong>${loginData.email}</strong><br>
             Password: <strong>${commonPassword}</strong><br><br>
 
